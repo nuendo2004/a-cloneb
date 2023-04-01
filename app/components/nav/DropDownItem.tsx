@@ -1,12 +1,16 @@
 "use client";
 
-interface MenuItemProps {
+interface DropDownItemProps {
   onClick: () => void;
   label: string;
-  className: string | null;
+  className?: string | null;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ className, onClick, label }) => {
+const DropDownItem: React.FC<DropDownItemProps> = ({
+  className,
+  onClick,
+  label,
+}) => {
   return (
     <div
       className={`${className} px-4 py-4 hover:bg-neutral-100 transition font-semibold`}
@@ -17,4 +21,4 @@ const MenuItem: React.FC<MenuItemProps> = ({ className, onClick, label }) => {
   );
 };
 
-export default MenuItem;
+export default DropDownItem;

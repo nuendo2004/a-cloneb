@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import Navbar from "./components/nav/Navbar";
+import Register from "./components/Model/Register";
+import ToasterWrapper from "./components/Toaster";
 
 export const metadata = {
   title: "A CloneB",
@@ -19,6 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <ToasterWrapper />
+        <Register />
         <Navbar />
         {children}
       </body>
