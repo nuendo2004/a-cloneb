@@ -3,8 +3,13 @@ import WideSection from "../WideSection";
 import Logo from "./Logo";
 import Search from "./Search";
 import Menu from "./Menu";
+import { SafeUser } from "@/app/types";
 
-const Navbar = () => {
+interface NavbarProps {
+  currentUser?: SafeUser | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   return (
     <nav className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -17,7 +22,7 @@ const Navbar = () => {
               <Search />
             </div>
             <div className="flex flex-1 justify-end">
-              <Menu />
+              <Menu currentUser={currentUser} />
             </div>
           </div>
         </WideSection>

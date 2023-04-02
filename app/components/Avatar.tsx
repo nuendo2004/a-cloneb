@@ -1,10 +1,14 @@
 "use client";
 import Image from "next/image";
 
-const Avatar = () => {
+interface AvatarProps {
+  src: string | null | undefined;
+}
+
+const Avatar: React.FC<AvatarProps> = ({ src }) => {
   return (
     <Image
-      src="/images/avatar.webp"
+      src={src ? src : "/images/avatar.webp"}
       className="rounded-full"
       height={30}
       width={30}

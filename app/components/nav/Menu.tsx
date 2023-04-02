@@ -4,8 +4,13 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
 import { useCallback, useState } from "react";
 import UserDropDown from "./UserDropDown";
+import { SafeUser } from "@/app/types";
 
-const Menu = () => {
+interface MenuProps {
+  currentUser?: SafeUser | null;
+}
+
+const Menu: React.FC<MenuProps> = ({ currentUser }) => {
   const [dropDown, setDropdown] = useState(false);
   const toggleDropDown = useCallback(() => {
     setDropdown((state) => !state);
@@ -27,10 +32,10 @@ const Menu = () => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
-        {dropDown && <UserDropDown />}
+        {dropDown && <UserDropDown currentUser={currentUser} />}
       </div>
     </div>
   );

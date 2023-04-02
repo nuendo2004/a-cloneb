@@ -2,36 +2,50 @@
 import { AiFillFacebook } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useState, useCallback } from "react";
+import useLogin from "@/app/hooks/useLogin";
 import useRegister from "@/app/hooks/useRegister";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { RegisterModel } from "./custom/Abstract";
-import { userRegister } from "@/app/service/userService";
+import { LoginModel } from "./custom/Abstract";
+import { userLogin } from "@/app/service/userService";
 import Model from "./Model";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
-import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-class RegisterConcrete extends RegisterModel {}
+class LoginConcrete extends LoginModel {}
 
-const Register = () => {
-  const registerhook = useRegister();
+const Login = () => {
+  const RegisterHook = useRegister();
+  const Loginhook = useLogin();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: new RegisterConcrete(),
+    defaultValues: new LoginConcrete(),
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (formData) => {
     setIsLoading(true);
-    userRegister(formData)
-      .then(() => {
-        registerhook.onClose();
+    userLogin("credentials", {
+      ...formData,
+      redirect: false,
+    })
+      .then((res) => {
+        setIsLoading(false);
+        if (res?.ok) {
+          toast.success("Welcome back");
+          router.refresh();
+          Loginhook.onClose();
+        }
+        if (res?.error) {
+          toast.error(res.error);
+        }
       })
       .catch((e) => {
         toast.error("Oops, something went wrong...");
@@ -42,7 +56,7 @@ const Register = () => {
 
   const content = (
     <div className="flex flex-col gap-4 px-2">
-      <Heading title="Welcome to ACloneB" subtitle="Create an account" />
+      <Heading title="Welcome back" subtitle="Login to your account" />
       <Input
         id="email"
         label="Email"
@@ -51,15 +65,6 @@ const Register = () => {
         error={errors}
         required
         type="email"
-      />
-      <Input
-        id="name"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        error={errors}
-        required
-        type="text"
       />
       <Input
         id="password"
@@ -83,7 +88,7 @@ const Register = () => {
           label="Continue with Google"
           outline
           icon={FcGoogle}
-          onClick={() => signIn("google")}
+          onClick={() => {}}
         />
       </div>
       <div>
@@ -91,14 +96,14 @@ const Register = () => {
           label="Continue with Facebook"
           outline
           icon={AiFillFacebook}
-          onClick={() => signIn("facebook")}
+          onClick={() => {}}
         />
       </div>
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex items-center gap-2 justify-center">
           <div>Already have an account?</div>
           <div
-            onClick={registerhook.onClose}
+            onClick={Loginhook.onClose}
             className="text-blue-700 cursor-pointer hover:underline"
           >
             Log in
@@ -110,11 +115,11 @@ const Register = () => {
 
   return (
     <Model
-      title="Register"
+      title="Login"
       actionLabel="Continue"
       disabled={isLoading}
-      isActive={registerhook.isActive}
-      onClose={registerhook.onClose}
+      isActive={Loginhook.isActive}
+      onClose={Loginhook.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={content}
       footer={footer}
@@ -122,4 +127,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
