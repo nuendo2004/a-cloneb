@@ -27,13 +27,16 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
-
-        const user = await dbClient.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
+        let user;
+        try {
+          user = await dbClient.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
+        } catch (e) {
+          console.log(e);
+        }
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
         }

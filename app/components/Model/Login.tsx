@@ -10,9 +10,10 @@ import { userLogin } from "@/app/service/userService";
 import Model from "./Model";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
-import { toast } from "react-hot-toast";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 class LoginConcrete extends LoginModel {}
 
@@ -88,7 +89,9 @@ const Login = () => {
           label="Continue with Google"
           outline
           icon={FcGoogle}
-          onClick={() => {}}
+          onClick={() => {
+            signIn("google");
+          }}
         />
       </div>
       <div>
@@ -96,7 +99,9 @@ const Login = () => {
           label="Continue with Facebook"
           outline
           icon={AiFillFacebook}
-          onClick={() => {}}
+          onClick={() => {
+            signIn("facebook");
+          }}
         />
       </div>
       <div className="text-neutral-500 text-center mt-4 font-light">
