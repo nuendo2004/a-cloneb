@@ -16,6 +16,7 @@ import { MdCabin, MdOutlineKingBed, MdOutlineVilla } from "react-icons/md";
 import { RiCactusLine } from "react-icons/ri";
 import { BsFire, BsSnow } from "react-icons/bs";
 import { FaSkiing } from "react-icons/fa";
+import React, { useRef, forwardRef, ReactElement } from "react";
 const categories = [
   {
     label: "Trending",
@@ -109,13 +110,16 @@ const categories = [
   },
 ];
 
-const Categories = () => {
+const Categories = React.forwardRef(function Categories(props, childref: any) {
   const params = useSearchParams();
   const category = params?.get("category");
   const pathname = usePathname();
   if (pathname !== "/") return null;
   return (
-    <div className="px-16 gap-12 pt-4 flex flex-row items-center justify-between overflow-x-auto">
+    <div
+      ref={childref}
+      className="gap-12 pt-4 flex flex-row items-center justify-between flex-nowrap transition-all"
+    >
       {categories.map((c) => (
         <Category
           key={c.label}
@@ -127,7 +131,7 @@ const Categories = () => {
       ))}
     </div>
   );
-};
+});
 
 export { categories };
 export default Categories;
