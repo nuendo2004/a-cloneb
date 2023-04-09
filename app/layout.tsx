@@ -2,6 +2,7 @@ import "./globals.css";
 import { Nunito } from "next/font/google";
 import Navbar from "./components/nav/Navbar";
 import Register from "./components/Model/Register";
+import RentHome from "./components/Model/RentHome";
 import ToasterWrapper from "./components/Toaster";
 import Login from "./components/Model/Login";
 import getCurrentUser from "./actions/getCurrentUser";
@@ -28,6 +29,7 @@ export default async function RootLayout({
         <ToasterWrapper />
         <Register />
         <Login />
+        <RentHome />
         <Navbar currentUser={currentUser} />
         {children}
       </body>

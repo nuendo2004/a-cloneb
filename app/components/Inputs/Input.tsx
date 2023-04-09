@@ -11,6 +11,7 @@ interface InputProps {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   error: FieldErrors;
+  className?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -22,9 +23,10 @@ const Input: React.FC<InputProps> = ({
   required,
   register,
   error,
+  className,
 }) => {
   return (
-    <div className="w-full relative">
+    <div className={`w-full relative ${className}`}>
       {formatPrice && (
         <BiDollar
           size={25}

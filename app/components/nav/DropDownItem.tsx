@@ -13,7 +13,7 @@ const DropDownItem: React.FC<DropDownItemProps> = ({
 }) => {
   return (
     <div
-      className={`${className} px-4 py-4 hover:bg-neutral-100 transition font-semibold`}
+      className={`${className} px-4 py-4 hover:bg-neutral-100  transition font-semibold`}
       onClick={onClick}
     >
       {label}

@@ -1,3 +1,4 @@
+"use client";
 import { TbBeach, TbPool } from "react-icons/tb";
 import { IoDiamond } from "react-icons/io5";
 import {

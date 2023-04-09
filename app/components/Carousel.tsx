@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef, useEffect, PropsWithChildren } from "react";
 import { IconType } from "react-icons";
 import Categories from "./nav/Categories";

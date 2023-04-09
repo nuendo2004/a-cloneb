@@ -12,6 +12,7 @@ import Input from "../Inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
 import { signIn } from "next-auth/react";
+import useLogin from "@/app/hooks/useLogin";
 
 class RegisterConcrete extends RegisterModel {}
 
@@ -39,6 +40,11 @@ const Register = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  const loginHook = useLogin();
+  const toggleModel = useCallback(() => {
+    loginHook.onOpen();
+    registerhook.onClose();
+  }, [loginHook, registerhook]);
 
   const content = (
     <div className="flex flex-col gap-4 px-2">
@@ -98,7 +104,7 @@ const Register = () => {
         <div className="flex items-center gap-2 justify-center">
           <div>Already have an account?</div>
           <div
-            onClick={registerhook.onClose}
+            onClick={toggleModel}
             className="text-blue-700 cursor-pointer hover:underline"
           >
             Log in

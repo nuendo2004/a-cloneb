@@ -18,8 +18,8 @@ import { toast } from "react-hot-toast";
 class LoginConcrete extends LoginModel {}
 
 const Login = () => {
-  const RegisterHook = useRegister();
-  const Loginhook = useLogin();
+  const registerHook = useRegister();
+  const loginhook = useLogin();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -54,6 +54,10 @@ const Login = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  const toggleModel = useCallback(() => {
+    loginhook.onClose();
+    registerHook.onOpen();
+  }, [loginhook, registerHook]);
 
   const content = (
     <div className="flex flex-col gap-4 px-2">
@@ -106,12 +110,12 @@ const Login = () => {
       </div>
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex items-center gap-2 justify-center">
-          <div>Already have an account?</div>
+          <div>First time using AcloneB?</div>
           <div
-            onClick={Loginhook.onClose}
+            onClick={toggleModel}
             className="text-blue-700 cursor-pointer hover:underline"
           >
-            Log in
+            Create an account
           </div>
         </div>
       </div>
@@ -123,8 +127,8 @@ const Login = () => {
       title="Login"
       actionLabel="Continue"
       disabled={isLoading}
-      isActive={Loginhook.isActive}
-      onClose={Loginhook.onClose}
+      isActive={loginhook.isActive}
+      onClose={loginhook.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={content}
       footer={footer}

@@ -65,17 +65,17 @@ const Model: React.FC<ModelProps> = ({
               <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus-outline-none">
                 <header className="flex items-center p-4 rounded-t justify-center relative border-b-[1px]">
                   <button
-                    className="p-1 border-0 hover:opacity-70 transition absolute left-8"
+                    className="p-1 border-0 hover:opacity-70 transition absolute left-4 md:left-8"
                     onClick={handleClose}
                   >
                     <IoMdClose />
                   </button>
                   <div className="text-lg font-semibold">{title}</div>
                 </header>
-                <section className="relative px-6 pt-8 pb-6 flex-auto">
+                <section className="relative md:px-8 px-4 pt-8 pb-6 flex-auto">
                   {body}
                 </section>
-                <div className="flex flex-col gap-4 px-8 pt-2 pb-8">
+                <div className="flex flex-col gap-4 px-4 md:px-8 pt-2 pb-8">
                   <div className="flex item-center gap-4 w-full">
                     {secondaryAction && secondaryLabel && (
                       <Button
