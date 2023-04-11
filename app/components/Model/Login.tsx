@@ -42,7 +42,7 @@ const Login = () => {
         if (res?.ok) {
           toast.success("Welcome back");
           router.refresh();
-          Loginhook.onClose();
+          loginhook.onClose();
         }
         if (res?.error) {
           toast.error(res.error);

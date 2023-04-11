@@ -22,14 +22,13 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${className} select-none text-center relative cursor-pointer disabled:opacity-70 disabled:cursr-not-allowed rounded-lg hover:opacity-80 transition w-full
-      ${outline ? "bg-white" : "bg-rose-500"}
-      ${outline ? "border-neutral-800" : "border-rose-500"}
-      ${outline ? "text-neutral-800" : "text-white"}
-      ${small ? "py-1" : "py-[12px]"}
-      ${outline ? "text-sm" : "text-md"}
-      ${outline ? "font-light" : "font-semibold"}
-      ${outline ? "border-[1px]" : "border-2"}`}
+      className={`${className} font-bold px-8 select-none text-center relative cursor-pointer disabled:opacity-70 disabled:cursr-not-allowed rounded-lg hover:opacity-80 transition w-full ${
+        outline ? "bg-white" : "bg-rose-500"
+      } ${outline ? "border-neutral-800" : "border-rose-500"} ${
+        outline ? "text-neutral-800" : "text-white"
+      } ${small ? "py-1" : "py-[12px]"} ${
+        outline ? "font-light" : "font-semibold"
+      } ${outline ? "border-[2px]" : "border-2"}`}
       onClick={onClick}
       disabled={disabled}
     >
