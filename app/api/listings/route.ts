@@ -19,6 +19,7 @@ const POST = async (req: Request) => {
     price,
     title,
     description,
+    review,
   } = reqBody;
 
   Object.keys(reqBody).forEach((val) => {
@@ -37,6 +38,7 @@ const POST = async (req: Request) => {
       price: parseInt(price, 10),
       title,
       description,
+      review: 4.9,
     },
   });
 

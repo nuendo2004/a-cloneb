@@ -23,7 +23,7 @@ export default async function Home() {
   return (
     <main>
       <Container>
-        <div className="pt-24 gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grod-cols-5">
+        <div className="max-w-[2520px] mx-auto xl:px-24 md:px-16 xm:px-4 px-8 pt-[24px] gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grod-cols-5">
           {mappedListing}
         </div>
       </Container>
