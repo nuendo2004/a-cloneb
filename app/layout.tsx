@@ -6,6 +6,7 @@ import RentHome from "./components/Model/RentHome";
 import ToasterWrapper from "./components/Toaster";
 import Login from "./components/Model/Login";
 import getCurrentUser from "./actions/getCurrentUser";
+import Carousel from "./components/Carousel";
 
 export const metadata = {
   title: "A CloneB",

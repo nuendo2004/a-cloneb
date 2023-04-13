@@ -4,6 +4,7 @@ import NotFound from "./components/NotFound";
 import getListing from "./actions/getListing";
 import ListingCard from "./components/listing/ListingCard";
 import getCurrentUser from "./actions/getCurrentUser";
+import Carousel from "./components/Carousel";
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function Home() {
@@ -23,6 +24,7 @@ export default async function Home() {
   return (
     <main>
       <Container>
+        <Carousel />
         <div className="max-w-[2520px] mx-auto xl:px-24 md:px-16 xm:px-4 px-8 pt-[24px] gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grod-cols-5">
           {mappedListing}
         </div>

@@ -12,4 +12,13 @@ const likeListing = (listingId: string) => {
   return axios.post(`/api/favorites/${listingId}`);
 };
 
-export { addNewProperty, likeListing, unlikeListing };
+const createReservation = (reservation: {
+  totalPrice: number;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  listingId: string;
+}) => {
+  return axios.post("/api/reservations", reservation);
+};
+
+export { addNewProperty, likeListing, unlikeListing, createReservation };

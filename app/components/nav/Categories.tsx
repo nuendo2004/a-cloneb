@@ -17,7 +17,7 @@ import { MdCabin, MdOutlineKingBed, MdOutlineVilla } from "react-icons/md";
 import { RiCactusLine } from "react-icons/ri";
 import { BsFire, BsSnow } from "react-icons/bs";
 import { FaSkiing } from "react-icons/fa";
-import React, { useRef, forwardRef, ReactElement } from "react";
+import React, { Ref } from "react";
 const categories = [
   {
     label: "Trending",

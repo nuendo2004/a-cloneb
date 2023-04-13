@@ -4,8 +4,6 @@ import Logo from "./Logo";
 import Search from "./Search";
 import Menu from "./Menu";
 import { SafeUser } from "@/app/types";
-import Carousel from "../Carousel";
-import { TfiArrowCircleLeft } from "react-icons/tfi";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -29,7 +27,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </WideSection>
       </div>
-      <Carousel button={TfiArrowCircleLeft} />
     </nav>
   );
 };

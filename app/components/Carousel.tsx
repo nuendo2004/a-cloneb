@@ -2,16 +2,12 @@
 import React, { useState, useRef, useEffect, PropsWithChildren } from "react";
 import { IconType } from "react-icons";
 import Categories from "./nav/Categories";
+import { TfiArrowCircleLeft } from "react-icons/tfi";
 interface CarouselProps extends PropsWithChildren {
   vertical?: boolean;
-  button: IconType;
   increment?: number;
 }
-const Carousel: React.FC<CarouselProps> = ({
-  vertical,
-  button: Button,
-  increment = 185,
-}) => {
+const Carousel: React.FC<CarouselProps> = ({ vertical, increment = 185 }) => {
   const [currentPos, setCurrentPos] = useState(0);
   const [leftArrow, setLeftArrow] = useState(false);
   const [rightArrow, setRightArrow] = useState(true);
@@ -67,7 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({
     `}
     >
       {leftArrow && (
-        <Button
+        <TfiArrowCircleLeft
           size={45}
           onClick={() => move("left")}
           className="z-1 cursor-pointer rounded-full bg-white translate"
@@ -78,7 +74,7 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
 
       {rightArrow && (
-        <Button
+        <TfiArrowCircleLeft
           onClick={() => move("right")}
           size={45}
           className="z-1 cursor-pointer rounded-full bg-white translate"
