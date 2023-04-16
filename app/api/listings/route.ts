@@ -19,6 +19,7 @@ const POST = async (req: Request) => {
     price,
     title,
     description,
+    detailImage,
     review,
   } = reqBody;
 
@@ -30,7 +31,7 @@ const POST = async (req: Request) => {
     data: {
       userId: currentUser.id,
       category,
-      locationValue: location.value,
+      location,
       guestCount,
       bathroomCount,
       roomCount,
@@ -39,6 +40,7 @@ const POST = async (req: Request) => {
       title,
       description,
       review: 4.9,
+      detailImage,
     },
   });
 

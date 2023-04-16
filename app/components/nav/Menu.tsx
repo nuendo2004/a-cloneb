@@ -7,7 +7,7 @@ import UserDropDown from "./UserDropDown";
 import { SafeUser } from "@/app/types";
 import useLogin from "@/app/hooks/useLogin";
 import useRentHome from "@/app/hooks/useRentHome";
-
+import useOnclickOutside from "react-cool-onclickoutside";
 interface MenuProps {
   currentUser?: SafeUser | null;
 }
@@ -26,6 +26,10 @@ const Menu: React.FC<MenuProps> = ({ currentUser }) => {
     }
     renthomeHook.onOpen();
   }, [currentUser, loginHook, renthomeHook]);
+
+  const ref = useOnclickOutside(() => {
+    setDropdown(false);
+  });
 
   return (
     <div>
@@ -47,7 +51,11 @@ const Menu: React.FC<MenuProps> = ({ currentUser }) => {
           </div>
         </div>
       </div>
-      {dropDown && <UserDropDown currentUser={currentUser} />}
+      <div ref={ref}>
+        {dropDown && (
+          <UserDropDown currentUser={currentUser} setDropDown={setDropdown} />
+        )}
+      </div>
     </div>
   );
 };

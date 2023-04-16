@@ -7,7 +7,9 @@ type SafeUser = Omit<User, "createdAt" | "updateAt" | "emailVerified"> & {
   emailVerified: string | null;
 };
 
-type SafeListing = Omit<Listing, "createdAt"> & { createdAt: string };
+type SafeListing = Omit<Listing, "createdAt"> & {
+  createdAt: string;
+};
 
 type ListingInfo = {
   user: SafeUser;
@@ -16,7 +18,7 @@ type ListingInfo = {
   roomCount: number;
   bathroomCount: number;
   guestCount: number;
-  locationValue: string;
+  location: PropertyLocation;
 };
 
 type SafeReservation = Omit<
@@ -29,4 +31,16 @@ type SafeReservation = Omit<
   listing: SafeListing;
 };
 
-export type { SafeUser, SafeListing, ListingInfo, SafeReservation };
+type PropertyLocation = {
+  address: string;
+  location: { city: string; state: string; country: string };
+  latlng: number[];
+};
+
+export type {
+  SafeUser,
+  SafeListing,
+  ListingInfo,
+  SafeReservation,
+  PropertyLocation,
+};

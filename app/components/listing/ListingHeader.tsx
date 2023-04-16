@@ -1,7 +1,7 @@
 "use client";
 
 import useCountries from "@/app/hooks/useCountries";
-import { SafeUser } from "@/app/types";
+import { PropertyLocation, SafeUser } from "@/app/types";
 import Heading from "../Heading";
 import Image from "next/image";
 import { AiFillStar } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { AiFillStar } from "react-icons/ai";
 interface ListingHeaderProps {
   title: string;
   imageSrc: string;
-  locationValue: string;
+  location: PropertyLocation;
   id: string;
   currentUser?: SafeUser | null;
   review?: number | null;
@@ -18,13 +18,12 @@ interface ListingHeaderProps {
 const ListingHeader: React.FC<ListingHeaderProps> = ({
   title,
   imageSrc,
-  locationValue,
+  location,
   id,
   currentUser,
   review,
 }) => {
   const { getCountryByValue } = useCountries();
-  const location = getCountryByValue(locationValue);
 
   return (
     <>
@@ -35,7 +34,7 @@ const ListingHeader: React.FC<ListingHeaderProps> = ({
             <AiFillStar size={16} className="mr-1" />
             <div className="text-md font-light">{review}</div>
           </div>
-          <div className="text-neutral-700">{`${location?.region}, ${location?.label}`}</div>
+          <div className="text-neutral-700">{`${location?.location.city}, ${location?.location.state}, ${location?.location.country}`}</div>
         </div>
       </div>
       <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">

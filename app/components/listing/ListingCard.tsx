@@ -9,6 +9,8 @@ import Image from "next/image";
 import Heart from "../Heart";
 import { AiFillStar } from "react-icons/ai";
 import Button from "../Button";
+import useLocation from "@/app/hooks/useLocation";
+import getDistance from "@/app/actions/getDistance";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -30,8 +32,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
   currentUser,
 }) => {
   const router = useRouter();
-  const { getCountryByValue } = useCountries();
-  const location = getCountryByValue(data.locationValue);
+  const location = data.location;
+  const { geoLocation } = useLocation();
 
   const handleCancellation = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -54,6 +56,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return `${format(startDate, "pp")} to ${format(endDate, "pp")}`;
   }, [reservation]);
 
+  const distance = geoLocation
+    ? getDistance(geoLocation, data.location.latlng)
+    : null;
+
   return (
     <div
       className="col-span-1 cursor-pointer group"
@@ -74,7 +80,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <div>
           <div className="flex justify-between items-center mt-1">
             <div className="font-semibold text-md ">
-              {location?.region}, {location?.label}
+              {location?.location.city}, {location?.location.state}
             </div>
             <div className="flex items-center">
               <AiFillStar size={16} className="mr-1" />
@@ -82,7 +88,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             </div>
           </div>
           <div className="font-light text-neutral-500 leading-none">
-            {reservationDate || data.category}
+            {reservationDate || `${distance} miles away` || data.category}
           </div>
         </div>
 

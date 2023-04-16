@@ -23,7 +23,7 @@ const GlobalMap: React.FC<MapProps> = ({ center, className }) => {
   return (
     <MapContainer
       center={(center as Leaf.LatLngExpression) || [51, -0.09]}
-      zoom={center ? 4 : 2}
+      zoom={center ? 15 : 2}
       scrollWheelZoom={false}
       className={`${className} h-[45vh] rounded-lg`}
     >

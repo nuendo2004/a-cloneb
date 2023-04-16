@@ -21,4 +21,14 @@ const createReservation = (reservation: {
   return axios.post("/api/reservations", reservation);
 };
 
-export { addNewProperty, likeListing, unlikeListing, createReservation };
+const cancelReservation = (id: string) => {
+  return axios.delete(`/api/reservations/${id}`);
+};
+
+export {
+  addNewProperty,
+  likeListing,
+  unlikeListing,
+  createReservation,
+  cancelReservation,
+};

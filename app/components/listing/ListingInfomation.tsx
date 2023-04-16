@@ -17,12 +17,12 @@ const ListingInfomation: React.FC<ListingInfoProp> = ({ listing }) => {
     roomCount,
     bathroomCount,
     category,
-    locationValue,
+    location,
   } = listing;
 
   const { getCountryByValue } = useCountries();
 
-  const coordinate = getCountryByValue(locationValue)?.latlng;
+  const coordinate = location?.latlng;
 
   return (
     <div className="col-span-7 flex flex-col gap-8">

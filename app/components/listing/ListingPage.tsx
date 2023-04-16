@@ -55,7 +55,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
     roomCount: listing.roomCount,
     guestCount: listing.guestCount,
     bathroomCount: listing.bathroomCount,
-    locationValue: listing.locationValue,
+    location: listing.location,
   };
 
   const onCreateReservation = useCallback(() => {
@@ -109,7 +109,7 @@ const ListingPage: React.FC<ListingPageProps> = ({
         <ListingHeader
           title={listing.title}
           imageSrc={listing.imageSrc}
-          locationValue={listing.locationValue}
+          location={listing.location}
           id={listing.id}
           review={listing.review}
           currentUser={currentUser}

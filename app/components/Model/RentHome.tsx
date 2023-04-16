@@ -13,6 +13,8 @@ import Input from "../Inputs/Input";
 import { addNewProperty } from "@/app/service/rentingService";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import SearchInput from "../Inputs/SearchInput";
+import AdressSearchInput from "../Inputs/AddressSearchInput";
 
 enum Wizard {
   _Category = 0,
@@ -42,6 +44,7 @@ const RentHome = () => {
       price: 0,
       title: "",
       description: "",
+      detailImage: [],
     },
   });
   const router = useRouter();
@@ -141,11 +144,8 @@ const RentHome = () => {
           title="Where is this property located?"
           subtitle="Help your guest to find you!"
         />
-        <CountrySelect
-          value={locationWatch}
-          onChange={(value) => setFieldValue("location", value)}
-          className="mt-4"
-        />
+        <AdressSearchInput isLoading={isLoading} setFormValue={setFieldValue} />
+
         <GlobalMap center={locationWatch?.latlng} className="mt-4" />
       </div>
     );

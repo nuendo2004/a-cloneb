@@ -6,7 +6,7 @@ import RentHome from "./components/Model/RentHome";
 import ToasterWrapper from "./components/Toaster";
 import Login from "./components/Model/Login";
 import getCurrentUser from "./actions/getCurrentUser";
-import Carousel from "./components/Carousel";
+import Script from "next/script";
 
 export const metadata = {
   title: "A CloneB",
@@ -27,6 +27,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <Script
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}&libraries=places`}
+        />
+
         <ToasterWrapper />
         <Register />
         <Login />

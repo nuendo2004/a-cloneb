@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Port_Lligat_Sans } from "next/font/google";
 import Container from "./components/Container";
 import NotFound from "./components/NotFound";
 import getListing from "./actions/getListing";
