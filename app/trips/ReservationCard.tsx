@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { useTransition } from "react";
 import { SafeReservation } from "../types";
 import Image from "next/image";
 import Heading from "../components/Heading";
-import Places from "./Places";
+import useTripDetail from "../hooks/useTripDetail";
 
 interface ReservationCardProps {
   reservation: SafeReservation;
@@ -26,9 +26,13 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservation }) => {
   const startDate = getFormatDates(reservation.startDate);
   const endDate = getFormatDates(reservation.endDate);
   const location = reservation.listing.location;
+  const tripDetail = useTripDetail();
 
   return (
-    <div className="max-w-full lg:max-w-[60vw] grid grid-cols-1 lg:grid-cols-2 h-[340px] overflow-hidden rounded-xl shadow-full">
+    <div
+      className="max-w-full lg:max-w-[60vw] grid grid-cols-1 lg:grid-cols-2 h-[340px] overflow-hidden rounded-xl shadow-full cursor-pointer"
+      onClick={() => tripDetail.onOpen(reservation)}
+    >
       <div className="order-1 lg:order-2 h-[170px] w-full lg:h-full relative">
         <Image
           fill

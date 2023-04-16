@@ -7,6 +7,7 @@ import ToasterWrapper from "./components/Toaster";
 import Login from "./components/Model/Login";
 import getCurrentUser from "./actions/getCurrentUser";
 import Script from "next/script";
+import TripDetail from "./trips/TripDetail";
 
 export const metadata = {
   title: "A CloneB",
@@ -35,6 +36,7 @@ export default async function RootLayout({
         <Register />
         <Login />
         <RentHome />
+        <TripDetail />
         <Navbar currentUser={currentUser} />
         <div className="pd-20 pt-26">{children}</div>
       </body>
