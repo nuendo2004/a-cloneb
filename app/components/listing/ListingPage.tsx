@@ -17,6 +17,7 @@ import { createReservation } from "@/app/service/rentingService";
 import { toast } from "react-hot-toast";
 import ListingReservation from "./ListingReservation";
 import { Range } from "react-date-range";
+import { sendEmail } from "@/app/service/userService";
 
 interface ListingPageProps {
   listing: SafeListing & {
@@ -64,9 +65,10 @@ const ListingPage: React.FC<ListingPageProps> = ({
     const listingId = listing?.id;
     setIsLoading(true);
     createReservation({ totalPrice, startDate, endDate, listingId })
-      .then(() => {
+      .then((res) => {
         toast.success("Listing reserved!");
         setDateRange(initialDate);
+        sendEmail(currentUser.email || "nuendo2004");
         router.refresh();
       })
       .catch(() => toast.error("Something went wrong, please try again later"))

@@ -22,6 +22,7 @@ const createReservation = (reservation: {
 };
 
 const cancelReservation = (id: string) => {
+  console.log("deleting", id);
   return axios.delete(`/api/reservations/${id}`);
 };
 

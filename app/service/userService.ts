@@ -14,4 +14,8 @@ const userLogin = (
   return signIn(provider, option);
 };
 
-export { userRegister, userLogin };
+const sendEmail = (email: string, body?: string) => {
+  return axios.post("../api/email", { email: email, emailBody: body });
+};
+
+export { userRegister, userLogin, sendEmail };

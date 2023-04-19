@@ -8,6 +8,7 @@ import Login from "./components/Model/Login";
 import getCurrentUser from "./actions/getCurrentUser";
 import Script from "next/script";
 import TripDetail from "./trips/TripDetail";
+import ManageReservation from "./reservations/ManageReservation";
 
 export const metadata = {
   title: "A CloneB",
@@ -37,6 +38,7 @@ export default async function RootLayout({
         <Login />
         <RentHome />
         <TripDetail />
+        <ManageReservation />
         <Navbar currentUser={currentUser} />
         <div className="pd-20 pt-26">{children}</div>
       </body>

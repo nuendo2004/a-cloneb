@@ -29,6 +29,7 @@ type SafeReservation = Omit<
   startDate: string;
   endDate: string;
   listing: SafeListing;
+  user: SafeUser;
 };
 
 type PropertyLocation = {

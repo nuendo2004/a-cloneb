@@ -2,8 +2,7 @@
 import { SafeListing, SafeUser } from "@/app/types";
 import { Reservation } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import useCountries from "@/app/hooks/useCountries";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { format } from "date-fns";
 import Image from "next/image";
 import Heart from "../Heart";
@@ -11,6 +10,7 @@ import { AiFillStar } from "react-icons/ai";
 import Button from "../Button";
 import useLocation from "@/app/hooks/useLocation";
 import getDistance from "@/app/actions/getDistance";
+import { useState } from "react";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -33,7 +33,15 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   const router = useRouter();
   const location = data.location;
-  const { geoLocation } = useLocation();
+  const { geoLocation, setLocation } = useLocation();
+  const [currentLocation, setCurrentLocation] = useState<number[]>([]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((res) => {
+      setCurrentLocation([res.coords.latitude, res.coords.longitude]);
+      setLocation([res.coords.latitude, res.coords.longitude]);
+    });
+  }, [setLocation]);
 
   const handleCancellation = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {

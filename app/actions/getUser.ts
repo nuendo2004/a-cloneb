@@ -1,8 +1,9 @@
 import dbClient from "../libs/mongodb";
 
 const getUser = async (userId: string) => {
+  let user;
   try {
-    const user = await dbClient.user.findUnique({
+    user = await dbClient.user.findUnique({
       where: {
         id: userId,
       },
@@ -10,6 +11,13 @@ const getUser = async (userId: string) => {
   } catch (e: any) {
     throw new Error(e);
   }
+  if (!user) return null;
+  return {
+    ...user,
+    createdAt: user.createdAt.toISOString(),
+    updateAt: user.updateAt.toISOString(),
+    emailVerified: user.emailVerified?.toISOString() || null,
+  };
 };
 
 export { getUser };

@@ -6,6 +6,7 @@ import Menu from "./Menu";
 import { SafeUser } from "@/app/types";
 import { useRouter } from "next/navigation";
 import useLocation from "@/app/hooks/useLocation";
+import { useEffect } from "react";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -15,9 +16,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   const router = useRouter();
   const { setLocation } = useLocation();
 
-  const userLocation = navigator.geolocation.getCurrentPosition((loc) =>
-    setLocation([loc.coords.latitude, loc.coords.longitude])
-  );
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition((loc) =>
+  //   setLocation([loc.coords.latitude, loc.coords.longitude])
+  // );
+  // }, [setLocation])
+
   return (
     <nav className="sticky w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">

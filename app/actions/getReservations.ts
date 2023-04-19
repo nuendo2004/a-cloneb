@@ -21,6 +21,7 @@ const getReservations = async (params: IParams) => {
       where: query,
       include: {
         listing: true,
+        user: true,
       },
       orderBy: {
         createdAt: "desc",
@@ -35,6 +36,10 @@ const getReservations = async (params: IParams) => {
       listing: {
         ...reservation.listing,
         createdAt: reservation.listing.createdAt.toISOString(),
+      },
+      user: {
+        ...reservation.user,
+        createdAt: reservation.user.createdAt.toISOString(),
       },
     }));
 
