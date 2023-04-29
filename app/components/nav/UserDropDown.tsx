@@ -21,7 +21,11 @@ const UserDropDown: React.FC<UserDropDownProps> = ({
   const router = useRouter();
 
   const redirect = (location: string) => {
-    router.push(location);
+    if (!currentUser) {
+      loginhook.onOpen();
+    } else {
+      router.push(location);
+    }
     setDropDown(false);
   };
 
@@ -32,7 +36,7 @@ const UserDropDown: React.FC<UserDropDownProps> = ({
           <>
             <DropDownItem onClick={() => redirect("/trips")} label="My trips" />
             <DropDownItem
-              onClick={() => redirect("/favorite")}
+              onClick={() => redirect("/favorites")}
               label="My favorites"
             />
             <DropDownItem
@@ -40,8 +44,8 @@ const UserDropDown: React.FC<UserDropDownProps> = ({
               label="My reservations"
             />
             <DropDownItem
-              onClick={() => redirect("/listings")}
-              label="My my properties"
+              onClick={() => redirect("/properties")}
+              label="My properties"
             />
             <DropDownItem onClick={rentModel.onOpen} label="ACloneB my home" />
             <hr />

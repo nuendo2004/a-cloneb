@@ -1,14 +1,18 @@
 import { Inter, Port_Lligat_Sans } from "next/font/google";
 import Container from "./components/Container";
 import NotFound from "./components/NotFound";
-import getListing from "./actions/getListing";
+import getListing, { IListingParam } from "./actions/getListing";
 import ListingCard from "./components/listing/ListingCard";
 import getCurrentUser from "./actions/getCurrentUser";
 import Carousel from "./components/Carousel";
 const inter = Inter({ subsets: ["latin"] });
 
-export default async function Home() {
-  const listing = await getListing();
+interface HomeProps {
+  searchParams: IListingParam;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const listing = await getListing(searchParams);
   const currentUser = await getCurrentUser();
 
   const mappedListing = listing.map((list) => (

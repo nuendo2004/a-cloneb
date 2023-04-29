@@ -7,9 +7,12 @@ import Button from "../components/Button";
 import { sendEmail } from "../service/userService";
 import { useRef } from "react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { cancelReservation } from "../service/rentingService";
 
 const ManageReservation = () => {
   const { reservation, isActive, onClose } = useManageReservation();
+  const router = useRouter();
   const messageBody = useRef<HTMLTextAreaElement>(null);
   let body;
   if (!reservation) return <></>;
@@ -17,7 +20,14 @@ const ManageReservation = () => {
   const startDate = format(new Date(reservation.startDate), "MM/dd/yyyy");
   const endDate = format(new Date(reservation.endDate), "MM/dd/yyyy");
 
-  const handleCancelReservation = () => {
+  const handleCancelReservation = (id: string) => {
+    cancelReservation(id)
+      .then(() => {
+        toast.success("Reservation cancelled");
+        router.refresh();
+        onClose();
+      })
+      .catch(() => toast.error("Something has failed, please try again"));
     onClose();
   };
   const handleSendMessage = () => {
@@ -67,7 +77,7 @@ const ManageReservation = () => {
           isActive={isActive}
           onClose={onClose}
           body={body}
-          onSubmit={handleCancelReservation}
+          onSubmit={() => handleCancelReservation(reservation.id)}
           actionLabel="Cancel This Reservation"
         />
       )}

@@ -40,7 +40,6 @@ const ReservationContactCard: React.FC<ReservationContactCard> = ({
       </div>
 
       <div className="flex flex-col gap-2">
-        {" "}
         <div className="mt-3">
           <div>
             Property:{" "}

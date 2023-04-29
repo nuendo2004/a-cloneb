@@ -28,7 +28,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={`${font.className} flex flex-col`}>
         <Script
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}&libraries=places`}
         />
@@ -40,7 +40,7 @@ export default async function RootLayout({
         <TripDetail />
         <ManageReservation />
         <Navbar currentUser={currentUser} />
-        <div className="pd-20 pt-26">{children}</div>
+        <div className="pd-20 pt-26 flex-grow">{children}</div>
       </body>
     </html>
   );
