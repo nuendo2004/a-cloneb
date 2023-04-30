@@ -31,15 +31,19 @@ const getReservations = async (params: IParams) => {
     const safeReservations = reservation.map((reservation) => ({
       ...reservation,
       createdAt: reservation.createdAt.toISOString(),
+      dateModified: reservation.dateModified.toISOString(),
       startDate: reservation.startDate.toISOString(),
       endDate: reservation.endDate.toISOString(),
       listing: {
         ...reservation.listing,
         createdAt: reservation.listing.createdAt.toISOString(),
+        dateModified: reservation.listing.dateModified.toISOString(),
       },
       user: {
         ...reservation.user,
         createdAt: reservation.user.createdAt.toISOString(),
+        updateAt: reservation.user.updateAt.toISOString(),
+        emailVerified: reservation.user.emailVerified?.toDateString() || null,
       },
     }));
 

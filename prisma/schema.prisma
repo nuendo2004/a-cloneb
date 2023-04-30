@@ -62,6 +62,7 @@ model Listing {
   imageSrc String
   detailImage String[]
   createdAt DateTime @default(now())
+  dateModified DateTime @default(now())
   category String
   roomCount Int
   bathroomCount Int
@@ -70,7 +71,8 @@ model Listing {
   userId String @db.ObjectId
   price Int
   review Float
-
+  isActive Boolean @default(true)
+  
   reservations Reservation[]
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -83,6 +85,10 @@ model Reservation {
   endDate DateTime
   totalPrice Int
   createdAt DateTime @default(now())
+  dateModified DateTime @default(now())
+  isActive Boolean @default(true)
+  hasPaid Boolean @default(false)
+  receipt String
 
   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

@@ -7,6 +7,7 @@ import useLocation from "../hooks/useLocation";
 import { toast } from "react-hot-toast";
 import { cancelReservation } from "../service/rentingService";
 import { useRouter } from "next/navigation";
+import { getPaymentUrl } from "../service/paymentService";
 
 const TripDetail = () => {
   const tripHook = useTripDetail();
@@ -40,15 +41,26 @@ const TripDetail = () => {
   );
 
   const handleCancelReservation = (id: string) => {
-    setDeleteId(id);
-    cancelReservation(id)
-      .then((res) => {
-        toast.success("Reservation cancelled");
-        router.refresh();
-        onClose();
-      })
-      .catch(() => toast.error("Something has failed, please try again"))
-      .finally(() => setDeleteId(""));
+    const payment = {
+      price: reservation!.listing.price,
+      propertyName: reservation!.listing.title,
+    };
+    if (!reservation?.hasPaid) {
+      getPaymentUrl(payment).then((res) => {
+        console.log(res.data.checkout);
+        router.push(res.data.checkout);
+      });
+    } else {
+      setDeleteId(id);
+      cancelReservation(id)
+        .then((res) => {
+          toast.success("Reservation cancelled");
+          router.refresh();
+          onClose();
+        })
+        .catch(() => toast.error("Something has failed, please try again"))
+        .finally(() => setDeleteId(""));
+    }
   };
 
   const getRoute = () => {
@@ -62,7 +74,7 @@ const TripDetail = () => {
         <div className="w-[100vw] h-[100vh] fixed bg-neutral-400/75 z-20">
           <Model
             title={`Your trip to ${reservation.listing.location.location.city}`}
-            actionLabel="Cancel Trip"
+            actionLabel={reservation.hasPaid ? "Cancel Trip" : "Pay Now"}
             isActive={isActive}
             body={body}
             onClose={onClose}
