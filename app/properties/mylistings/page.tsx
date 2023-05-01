@@ -11,14 +11,12 @@ interface MyPropProps {
 
 const MyProperties: React.FC<MyPropProps> = ({ listings }) => {
   return (
-    <WideSection>
-      <div className="flex flex-col sm:flex-row sm:justify-between">
-        <Heading title="My properties" subtitle="Manage your listings" />
-        <div className="my-auto">
-          <Button label="Add New" onClick={() => {}} />
-        </div>
+    <div className="flex flex-col sm:flex-row sm:justify-between">
+      <Heading title="My properties" subtitle="Manage your listings" />
+      <div className="my-auto">
+        <Button label="Add New" onClick={() => {}} />
       </div>
-    </WideSection>
+    </div>
   );
 };
 

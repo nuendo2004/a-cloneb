@@ -15,8 +15,7 @@ const Property = async () => {
   return (
     <section className="flex flex-col h-full lg:flex-row">
       <AdminPanel currentUser={currentUser} />
-      <Overview />
-      <MyProperties listings={myListings} />
+      <Overview listings={myListings} />
     </section>
   );
 };

@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET!, {
+  apiVersion: "2022-11-15",
+  timeout: 100000,
+});
+console.log(stripe);
 const POST = async (req: Request) => {
-  const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY!, {
-    apiVersion: "2022-11-15",
-    timeout: 100000,
-  });
-  console.log(stripe);
-
   const {
     propertyName,
     price,
@@ -16,8 +15,8 @@ const POST = async (req: Request) => {
     sessions = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
+      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/result?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
       line_items: [
         {
           price_data: {
@@ -36,7 +35,7 @@ const POST = async (req: Request) => {
     throw new Error("PaymentFailed", e);
   }
 
-  return NextResponse.json({ checkout: sessions.url });
+  return NextResponse.json({ sessionId: sessions.id });
 };
 
 export { POST };

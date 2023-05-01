@@ -39,13 +39,10 @@ const UserDropDown: React.FC<UserDropDownProps> = ({
               onClick={() => redirect("/favorites")}
               label="My favorites"
             />
-            <DropDownItem
-              onClick={() => redirect("/reservations")}
-              label="My reservations"
-            />
+            <hr />
             <DropDownItem
               onClick={() => redirect("/properties")}
-              label="My properties"
+              label="Manage Listings"
             />
             <DropDownItem onClick={rentModel.onOpen} label="ACloneB my home" />
             <hr />

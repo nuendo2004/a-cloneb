@@ -12,7 +12,10 @@ interface HomeProps {
 }
 
 export default async function Home({ searchParams }: HomeProps) {
-  if (!process.env.NEXT_PUBLIC_STRIPE_KEY!)
+  if (
+    !process.env.NEXT_PUBLIC_STRIPE_KEY ||
+    !process.env.NEXT_PUBLIC_STRIPE_SECRET
+  )
     throw new Error("Critical error: no stripe key found");
 
   const listing = await getListing(searchParams);

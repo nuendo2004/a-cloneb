@@ -7,7 +7,7 @@ import useLocation from "../hooks/useLocation";
 import { toast } from "react-hot-toast";
 import { cancelReservation } from "../service/rentingService";
 import { useRouter } from "next/navigation";
-import { getPaymentUrl } from "../service/paymentService";
+import usePayment from "../hooks/usePayment";
 
 const TripDetail = () => {
   const tripHook = useTripDetail();
@@ -39,17 +39,10 @@ const TripDetail = () => {
     ),
     [showCurrentRoute, currentCoords, reservation]
   );
-
+  const { redirectToPayment } = usePayment();
   const handleCancelReservation = (id: string) => {
-    const payment = {
-      price: reservation!.listing.price,
-      propertyName: reservation!.listing.title,
-    };
     if (!reservation?.hasPaid) {
-      getPaymentUrl(payment).then((res) => {
-        console.log(res.data.checkout);
-        router.push(res.data.checkout);
-      });
+      redirectToPayment(reservation!);
     } else {
       setDeleteId(id);
       cancelReservation(id)
