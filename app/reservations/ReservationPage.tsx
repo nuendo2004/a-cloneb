@@ -78,7 +78,7 @@ const ReservationPage: React.FC<ReservationPageProps> = ({
       <WideSection>
         <Heading title="Reservations" subtitle="Manage your bookings" />
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {reservations.map((resv) => (
+          {reservations.map((resv: any) => (
             <ReservationContactCard key={resv.id} reservation={resv} />
           ))}
         </div>

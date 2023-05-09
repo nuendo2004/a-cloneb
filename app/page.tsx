@@ -21,7 +21,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const listing = await getListing(searchParams);
   const currentUser = await getCurrentUser();
 
-  const mappedListing = listing.map((list) => (
+  const mappedListing = listing.map((list: any) => (
     <ListingCard
       key={list.id}
       data={list}

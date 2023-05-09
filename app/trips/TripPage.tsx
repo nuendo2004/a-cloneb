@@ -30,7 +30,7 @@ const TripPage: React.FC<TripPageProps> = ({ reservation, currentUser }) => {
   const getPaidReservation = useCallback(() => {
     return reservation
       .filter((reservation) => reservation.hasPaid)
-      .map((resv) => (
+      .map((resv: any) => (
         <div key={resv.id} className="flex">
           <ReservationCard reservation={resv} />
           <Places latlng={resv.listing.location.latlng} />
@@ -41,7 +41,7 @@ const TripPage: React.FC<TripPageProps> = ({ reservation, currentUser }) => {
   const getPendingReservation = useCallback(() => {
     return reservation
       .filter((reservation) => !reservation.hasPaid)
-      .map((resv) => (
+      .map((resv: any) => (
         <div key={resv.id}>
           <ReservationCard
             reservation={resv}

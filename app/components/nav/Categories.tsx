@@ -121,7 +121,7 @@ const Categories = React.forwardRef(function Categories(props, childref: any) {
       ref={childref}
       className="gap-12 pt-4 flex flex-row items-center justify-between flex-nowrap transition-all"
     >
-      {categories.map((c) => (
+      {categories.map((c: any) => (
         <Category
           key={c.label}
           label={c.label}

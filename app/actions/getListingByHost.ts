@@ -11,7 +11,7 @@ const getListingByHost = async ({ userId }: { userId: string }) => {
       },
     });
     if (!listings) return null;
-    return listings.map((listing) => ({
+    return listings.map((listing: any) => ({
       ...listing,
       createdAt: listing.createdAt.toISOString(),
       dateModified: listing.dateModified.toISOString(),

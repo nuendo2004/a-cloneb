@@ -115,7 +115,7 @@ const RentHome = () => {
         subtitle="Pick a category"
       />
       <div className="grid grid-col-2 md:grid-cols-3 px-2 gap-3 max-h-[50vh] overflow-y-auto">
-        {categories.map((category) => (
+        {categories.map((category: any) => (
           <div key={category.label} className="col-span-1">
             <div
               className={`

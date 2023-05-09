@@ -16,7 +16,7 @@ const MyProperties = async () => {
 
   const myListings = (await getListingByHost({ userId: currentUser.id })) || [];
 
-  const body = myListings.map((list) => (
+  const body = myListings.map((list: any) => (
     <ListingCard
       data={list}
       actionId=""
