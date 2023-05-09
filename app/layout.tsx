@@ -9,6 +9,7 @@ import getCurrentUser from "./actions/getCurrentUser";
 import Script from "next/script";
 import TripDetail from "./trips/TripDetail";
 import ManageReservation from "./reservations/ManageReservation";
+import Search from "./components/Model/Search";
 
 export const metadata = {
   title: "A CloneB",
@@ -32,7 +33,7 @@ export default async function RootLayout({
         <Script
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}&libraries=places`}
         />
-
+        <Search />
         <ToasterWrapper />
         <Register />
         <Login />

@@ -1,17 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-type Location {
-  city String
-  state String
-  country String
-}
-type PropertyLocation {
-  address String
-  location Location
-  latlng Float[]
-}
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -55,6 +44,16 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+type Location {
+  city String
+  state String
+  country String
+}
+type PropertyLocation {
+  address String
+  location Location
+  latlng Float[]
+}
 model Listing {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String

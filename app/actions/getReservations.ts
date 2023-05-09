@@ -1,5 +1,6 @@
 import { error } from "console";
 import dbClient from "../libs/mongodb";
+import { NextResponse } from "next/server";
 
 interface IParams {
   listingId?: string;
@@ -53,4 +54,24 @@ const getReservations = async (params: IParams) => {
   }
 };
 
-export { getReservations };
+const addPayment = async (data: {
+  reservationId: any;
+  receiptNumber: string;
+}) => {
+  try {
+    const reservation = await dbClient.reservation.update({
+      where: {
+        id: data.reservationId,
+      },
+      data: {
+        hasPaid: true,
+        receipt: data.receiptNumber,
+      },
+    });
+    return reservation;
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
+
+export { getReservations, addPayment };

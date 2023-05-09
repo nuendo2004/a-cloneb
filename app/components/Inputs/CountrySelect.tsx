@@ -7,7 +7,7 @@ import AdressSearchInput from "./AddressSearchInput";
 interface CountrySelectProps {
   value?: CountrySelection;
   onChange: (value: CountrySelection) => void;
-  className: string;
+  className?: string;
 }
 export type CountrySelection = {
   flag: string;

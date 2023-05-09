@@ -18,7 +18,6 @@ const POST = async (req: Request) => {
   const { email, emailBody } = body;
 
   const Source = process.env.NEXT_PUBLIC_EMAIL_ACCOUNT || "";
-  console.log(Source);
   const sendEmailCommand = new SendEmailCommand({
     Destination: {
       CcAddresses: [Source],

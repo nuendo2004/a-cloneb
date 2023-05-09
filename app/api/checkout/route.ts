@@ -4,18 +4,24 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET!, {
   apiVersion: "2022-11-15",
   timeout: 100000,
 });
-console.log(stripe);
 const POST = async (req: Request) => {
   const {
-    propertyName,
+    reservationId,
     price,
-  }: { propertyName: string; dates: number; price: number } = await req.json();
-  let sessions;
+    unit,
+    propertyName,
+  }: {
+    propertyName: string;
+    reservationId: string;
+    price: number;
+    unit: number;
+  } = await req.json();
+  let session;
   try {
-    sessions = await stripe.checkout.sessions.create({
+    session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/result?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/checkout?session_id={CHECKOUT_SESSION_ID}&reservationId=${reservationId}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
       line_items: [
         {
@@ -26,16 +32,15 @@ const POST = async (req: Request) => {
             },
             unit_amount: price,
           },
-          quantity: 1,
+          quantity: unit,
         },
       ],
     });
   } catch (e: any) {
-    console.log(e);
+    // console.log(e);
     throw new Error("PaymentFailed", e);
   }
-
-  return NextResponse.json({ sessionId: sessions.id });
+  return NextResponse.json({ session });
 };
 
 export { POST };
