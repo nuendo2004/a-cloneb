@@ -1,4 +1,4 @@
-import { Listing, Reservation, User } from "@prisma/client";
+import type { Listing, Reservation, User } from "@prisma/client";
 import { IconType } from "react-icons";
 
 type SafeUser = Omit<User, "createdAt" | "updateAt" | "emailVerified"> & {

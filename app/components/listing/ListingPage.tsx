@@ -5,7 +5,7 @@ import {
   SafeReservation,
   SafeUser,
 } from "@/app/types";
-import { Reservation } from "@prisma/client";
+import type { Reservation } from "@prisma/client";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { categories } from "../nav/Categories";
 import ListingHeader from "./ListingHeader";

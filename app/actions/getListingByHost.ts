@@ -1,3 +1,4 @@
+import type { Listing } from "@prisma/client";
 import dbClient from "../libs/mongodb";
 
 const getListingByHost = async ({ userId }: { userId: string }) => {
@@ -11,7 +12,7 @@ const getListingByHost = async ({ userId }: { userId: string }) => {
       },
     });
     if (!listings) return null;
-    return listings.map((listing: any) => ({
+    return listings.map((listing: Listing) => ({
       ...listing,
       createdAt: listing.createdAt.toISOString(),
       dateModified: listing.dateModified.toISOString(),

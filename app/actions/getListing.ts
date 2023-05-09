@@ -1,3 +1,4 @@
+import type { Listing } from "@prisma/client";
 import dbClient from "../libs/mongodb";
 
 export interface IListingParam {
@@ -61,7 +62,7 @@ export default async function getListing(params: IListingParam) {
         createdAt: "desc",
       },
     });
-    const safelistings = listings.map((list: any) => ({
+    const safelistings = listings.map((list: Listing) => ({
       ...list,
       createdAt: list.createdAt.toISOString(),
       dateModified: list.dateModified.toISOString(),

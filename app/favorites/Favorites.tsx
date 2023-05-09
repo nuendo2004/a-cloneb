@@ -15,7 +15,7 @@ const Favorites: React.FC<FavoritesProps> = ({ listings, currentUser }) => {
       <WideSection>
         <Heading title="Favorites" subtitle="List of places you liked" />
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grod-cols-5 gap-8">
-          {listings.map((list: any) => (
+          {listings.map((list: SafeListing) => (
             <ListingCard
               actionId=""
               data={list}
