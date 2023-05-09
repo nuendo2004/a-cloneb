@@ -21,8 +21,10 @@ const POST = async (req: Request) => {
     session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/checkout?session_id={CHECKOUT_SESSION_ID}&reservationId=${reservationId}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
+      success_url: `${req.headers.get(
+        "origin"
+      )}/checkout?session_id={CHECKOUT_SESSION_ID}&reservationId=${reservationId}`,
+      cancel_url: `${req.headers.get("origin")}/`,
       line_items: [
         {
           price_data: {
