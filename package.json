@@ -43,9 +43,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && prisma generate && prisma migrate deploy",
     "start": "next start",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint"
   },
   "devDependencies": {
