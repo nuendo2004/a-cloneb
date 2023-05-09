@@ -48,7 +48,14 @@ const ReservationContactCard: React.FC<ReservationContactCard> = ({
             </h3>
           </div>
         </div>
-        <div>Status: approved</div>
+        <div>
+          Status:{" "}
+          {reservation.hasPaid ? (
+            <p className="text-green-600">Approved</p>
+          ) : (
+            <p className="text-red-600">Waiting for payment</p>
+          )}
+        </div>
         <div>
           <div className="text-neutral-500">
             {"Start:"} {format(new Date(startDate), "dd/MM/yyyy")}

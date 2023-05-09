@@ -1,3 +1,4 @@
+import { Listing } from "@prisma/client";
 import dbClient from "../libs/mongodb";
 import getCurrentUser from "./getCurrentUser";
 
@@ -17,9 +18,10 @@ export default async function getFoveriteListing() {
       },
     });
 
-    const safeFavorites = favorites.map((fav) => ({
+    const safeFavorites = favorites.map((fav: Listing) => ({
       ...fav,
       createdAt: fav.createdAt.toISOString(),
+      dateModified: fav.dateModified.toISOString(),
     }));
 
     return safeFavorites;

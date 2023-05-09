@@ -48,9 +48,14 @@ const ManageReservation = () => {
         <div>Location: {reservation.listing.location.address}</div>
         <div>
           Payment: $
-          <span className="text-green-600 font-bold text-lg">
+          <span
+            className={`${
+              reservation.hasPaid ? "text-green-600" : "text-red-600"
+            } font-bold text-lg`}
+          >
             {" "}
-            {reservation.totalPrice}
+            {reservation.totalPrice}{" "}
+            {reservation.hasPaid ? "received" : "unpaid"}
           </span>
         </div>
       </div>

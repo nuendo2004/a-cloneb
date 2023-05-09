@@ -9,6 +9,7 @@ export default async function getListing() {
     const safelistings = listings.map((list) => ({
       ...list,
       createdAt: list.createdAt.toISOString(),
+      dateModified: list.dateModified.toISOString(),
     }));
 
     return safelistings;

@@ -1,4 +1,5 @@
 import getCurrentUser from "../actions/getCurrentUser";
+import { getListingByHost } from "../actions/getListingByHost";
 import getListing from "../actions/getListing";
 import AdminPanel from "./AdminPanel";
 import MyProperties from "./mylistings/page";
@@ -10,13 +11,10 @@ const Property = async () => {
     return <></>;
   }
 
-  const myListings = await getListing({ userId: currentUser.id });
-
   return (
     <section className="flex flex-col h-full lg:flex-row">
       <AdminPanel currentUser={currentUser} />
-      <Overview />
-      <MyProperties listings={myListings} />
+      <Overview currentUser={currentUser} />
     </section>
   );
 };

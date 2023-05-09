@@ -7,8 +7,9 @@ type SafeUser = Omit<User, "createdAt" | "updateAt" | "emailVerified"> & {
   emailVerified: string | null;
 };
 
-type SafeListing = Omit<Listing, "createdAt"> & {
+type SafeListing = Omit<Listing, "createdAt" | "dateModified"> & {
   createdAt: string;
+  dateModified: string;
 };
 
 type ListingInfo = {
@@ -23,13 +24,14 @@ type ListingInfo = {
 
 type SafeReservation = Omit<
   Reservation,
-  "createdAt" | "startDate" | "endDate" | "listing"
+  "createdAt" | "startDate" | "endDate" | "listing" | "dateModified"
 > & {
   createdAt: string;
   startDate: string;
   endDate: string;
   listing: SafeListing;
   user: SafeUser;
+  dateModified: string;
 };
 
 type PropertyLocation = {

@@ -1,9 +1,15 @@
 "use client";
+import useSearch from "@/app/hooks/useSearch";
 import { BiSearch } from "react-icons/bi";
 
 const Search = () => {
+  const search = useSearch();
+
   return (
-    <div className="border-[1px] w-full md:w-auto py-[6px] rounded-full shadow-sm hover:shadow-md transition cursor-pointer">
+    <div
+      className="border-[1px] w-full md:w-auto py-[6px] rounded-full shadow-sm hover:shadow-md transition cursor-pointer"
+      onClick={search.onOpen}
+    >
       <div className="flex items-center justify-between">
         <div className="text-sm font-semibold px-6 text-center">Anywhere</div>
         <div className="hidden sm:block text-sm font-semibold px-5 border-x-[1px] flex-1 text-center">

@@ -17,13 +17,18 @@ Leaf.Icon.Default.mergeOptions({
 type MapProps = {
   center?: number[];
   className?: string;
+  zoomOut?: boolean;
 };
 
-const GlobalMap: React.FC<MapProps> = ({ center, className }) => {
+const GlobalMap: React.FC<MapProps> = ({
+  center,
+  className,
+  zoomOut = false,
+}) => {
   return (
     <MapContainer
       center={(center as Leaf.LatLngExpression) || [51, -0.09]}
-      zoom={center ? 15 : 2}
+      zoom={!zoomOut ? 15 : 2}
       scrollWheelZoom={false}
       className={`${className} h-[45vh] rounded-lg`}
     >

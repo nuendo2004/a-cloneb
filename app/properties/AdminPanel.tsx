@@ -10,12 +10,9 @@ interface AdminPanelProps {
 
 const AdminPanel: React.FC<AdminPanelProps> = ({ currentUser }) => {
   const router = useRouter();
-  const handleNavigate = () => {
-    router.push("/properties/mylistings");
-  };
 
   return (
-    <div className="bg-neutral-100 p-[3rem] h-full">
+    <div className="bg-neutral-100 p-[2rem] min-w-[20rem] h-full">
       <Avatar width={70} height={70} src={currentUser.image} />
       <h2 className="text-3xl my-3">Good Morning,</h2>
       <h2 className="text-3xl my-3 font-bold">
@@ -24,7 +21,12 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ currentUser }) => {
       <Button
         label="My Property"
         className="sm:my-5"
-        onClick={handleNavigate}
+        onClick={() => router.push("/properties/mylistings")}
+      />
+      <Button
+        label="My Reservation"
+        className="sm:my-5"
+        onClick={() => router.push("/reservations")}
       />
     </div>
   );

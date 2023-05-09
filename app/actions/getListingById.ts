@@ -19,6 +19,7 @@ const getListingById = async (params: IParams) => {
     return {
       ...listing,
       createdAt: listing.createdAt.toISOString(),
+      dateModified: listing.dateModified.toISOString(),
       user: {
         ...listing.user,
         createdAt: listing.user.createdAt.toISOString(),

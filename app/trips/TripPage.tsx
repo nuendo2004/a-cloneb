@@ -3,7 +3,7 @@ import Heading from "../components/Heading";
 import Container from "../components/Container";
 import { SafeReservation, SafeUser } from "../types";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { cancelReservation } from "../service/rentingService";
 import ReservationCard from "./ReservationCard";
 import { toast } from "react-hot-toast";
@@ -27,16 +27,46 @@ const TripPage: React.FC<TripPageProps> = ({ reservation, currentUser }) => {
       .finally(() => setDeleteId(""));
   };
 
+  const getPaidReservation = useCallback(() => {
+    return reservation
+      .filter((reservation) => reservation.hasPaid)
+      .map((resv) => (
+        <div key={resv.id} className="flex">
+          <ReservationCard reservation={resv} />
+          <Places latlng={resv.listing.location.latlng} />
+        </div>
+      ));
+  }, [reservation]);
+
+  const getPendingReservation = useCallback(() => {
+    return reservation
+      .filter((reservation) => !reservation.hasPaid)
+      .map((resv) => (
+        <div key={resv.id}>
+          <ReservationCard
+            reservation={resv}
+            minimum={true}
+            option={
+              <div className="bg-white rounded-2xl px-3 flex items-center">
+                <div className="text-1xl text-red-600 me-2">•</div>
+                <div>Waiting for payment</div>
+              </div>
+            }
+          />
+        </div>
+      ));
+  }, [reservation]);
+
   return (
     <Container>
-      <Heading title="Trips" />
+      <Heading title="Your Trips" />
       <div className="mt-10 gap-8 grid grid-cols-1 w-full">
-        {reservation.map((resv) => (
-          <div key={resv.id} className="flex">
-            <ReservationCard reservation={resv} />
-            <Places latlng={resv.listing.location.latlng} />
-          </div>
-        ))}
+        {getPaidReservation()}
+      </div>
+      <hr />
+      <Heading title="Pending" />
+      <div className="mt-10 gap-8 grid grid-cols-3 w-full">
+        {getPendingReservation()}
       </div>
     </Container>
   );
