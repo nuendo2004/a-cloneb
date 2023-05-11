@@ -31,7 +31,7 @@ const ManageReservation = () => {
     onClose();
   };
   const handleSendMessage = () => {
-    sendEmail(user.email || "", messageBody.current?.value);
+    sendEmail(user.email || "", messageBody.current?.value || "");
     toast.success("Message Sent");
     onClose();
   };
