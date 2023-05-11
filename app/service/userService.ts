@@ -14,7 +14,7 @@ const userLogin = (
   return signIn(provider, option);
 };
 
-const sendEmail = (email: string, body?: string) => {
+const sendEmail = (email: string, body: string) => {
   return axios.post("../api/email", { email: email, emailBody: body });
 };
 

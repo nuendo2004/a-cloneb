@@ -1,6 +1,6 @@
-import { error } from "console";
 import dbClient from "../libs/mongodb";
-import { NextResponse } from "next/server";
+import { Reservation, Listing, User } from "@prisma/client";
+import { SafeReservation } from "../types";
 
 interface IParams {
   listingId?: string;
@@ -29,24 +29,26 @@ const getReservations = async (params: IParams) => {
       },
     });
 
-    const safeReservations = reservation.map((reservation: any) => ({
-      ...reservation,
-      createdAt: reservation.createdAt.toISOString(),
-      dateModified: reservation.dateModified.toISOString(),
-      startDate: reservation.startDate.toISOString(),
-      endDate: reservation.endDate.toISOString(),
-      listing: {
-        ...reservation.listing,
-        createdAt: reservation.listing.createdAt.toISOString(),
-        dateModified: reservation.listing.dateModified.toISOString(),
-      },
-      user: {
-        ...reservation.user,
-        createdAt: reservation.user.createdAt.toISOString(),
-        updateAt: reservation.user.updateAt.toISOString(),
-        emailVerified: reservation.user.emailVerified?.toDateString() || null,
-      },
-    }));
+    const safeReservations = reservation.map(
+      (reservation: any): SafeReservation => ({
+        ...reservation,
+        createdAt: reservation.createdAt.toISOString(),
+        dateModified: reservation.dateModified.toISOString(),
+        startDate: reservation.startDate.toISOString(),
+        endDate: reservation.endDate.toISOString(),
+        listing: {
+          ...reservation.listing,
+          createdAt: reservation.listing.createdAt.toISOString(),
+          dateModified: reservation.listing.dateModified.toISOString(),
+        },
+        user: {
+          ...reservation.user,
+          createdAt: reservation.user.createdAt.toISOString(),
+          updateAt: reservation.user.updateAt.toISOString(),
+          emailVerified: reservation.user.emailVerified?.toDateString() || null,
+        },
+      })
+    );
 
     return safeReservations;
   } catch (error: any) {

@@ -28,9 +28,9 @@ const POST = async (req: Request) => {
         Html: {
           Charset: "UTF-8",
           Data:
-            emailBody.length === 0
-              ? "<h1>HTML_FORMAT_BODY</h1>"
-              : `<h2>${emailBody}</h2>`,
+            emailBody.length > 0
+              ? `<h2>${emailBody}</h2>`
+              : "<h1>Thank you for choosing AcloneB, You reservation is successfully booked</h1>",
         },
         Text: {
           Charset: "UTF-8",

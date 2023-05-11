@@ -65,11 +65,26 @@ const ListingPage: React.FC<ListingPageProps> = ({
     const listingId = listing?.id;
     setIsLoading(true);
     createReservation({ totalPrice, startDate, endDate, listingId })
-      .then((res) => {
+      .then((res: any) => {
+        console.log(res);
         toast.success("Listing reserved!");
         setDateRange(initialDate);
-        sendEmail(currentUser.email || "nuendo2004");
-        router.refresh();
+        sendEmail(
+          currentUser.email || "nuendo2004@gmail.com",
+          `<div>
+          <h1>Your receipt from A cloneB </h1>
+          <h3>Thank you for booking with us</h3>
+          <div></div>
+          <p>You trip to ${res.data.location.location.city} at ${
+            res.data.createdAt.split("T")[0]
+          }</p>
+          <p>Address: ${res.data.location.address}</p>
+          <div></div>
+          <span>You total is $${res.data.price} usd.</span>
+          </div>
+        `
+        );
+        router.push("/trips");
       })
       .catch(() => toast.error("Something went wrong, please try again later"))
       .finally(() => {
