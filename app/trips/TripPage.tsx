@@ -33,7 +33,10 @@ const TripPage: React.FC<TripPageProps> = ({ reservation, currentUser }) => {
       .map((resv: SafeReservation) => (
         <div key={resv.id} className="flex">
           <ReservationCard reservation={resv} />
-          <Places latlng={resv.listing.location.latlng} />
+          <Places
+            latlng={resv.listing.location.latlng}
+            className="hidden lg:block"
+          />
         </div>
       ));
   }, [reservation]);
@@ -58,12 +61,12 @@ const TripPage: React.FC<TripPageProps> = ({ reservation, currentUser }) => {
   }, [reservation]);
 
   return (
-    <Container>
+    <Container className="py-4">
       <Heading title="Your Trips" />
       <div className="mt-10 gap-8 grid grid-cols-1 w-full">
         {getPaidReservation()}
       </div>
-      <hr />
+      <hr className="my-4" />
       <Heading title="Pending" />
       <div className="mt-10 gap-8 grid grid-cols-3 w-full">
         {getPendingReservation()}

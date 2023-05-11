@@ -40,7 +40,6 @@ export default async function RootLayout({
         <RentHome />
         <TripDetail />
         <ManageReservation />
-        <Navbar currentUser={currentUser} />
         <div className="pd-20 pt-26 flex-grow">{children}</div>
       </body>
     </html>

@@ -3,6 +3,7 @@ import getCurrentUser from "../actions/getCurrentUser";
 import { getReservations } from "../actions/getReservations";
 import TripPage from "./TripPage";
 import WideSection from "../components/WideSection";
+import Navbar from "../components/nav/Navbar";
 
 const page = async () => {
   const currentUser = await getCurrentUser();
@@ -21,6 +22,7 @@ const page = async () => {
 
   return (
     <div>
+      <Navbar currentUser={currentUser} search={false} />
       <WideSection>
         <TripPage reservation={reservation} currentUser={currentUser} />
       </WideSection>

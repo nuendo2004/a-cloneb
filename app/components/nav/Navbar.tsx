@@ -10,30 +10,29 @@ import { useEffect } from "react";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
+  search?: boolean;
+  fixed?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  currentUser,
+  search = true,
+  fixed = false,
+}) => {
   const router = useRouter();
-  const { setLocation } = useLocation();
-
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition((loc) =>
-  //   setLocation([loc.coords.latitude, loc.coords.longitude])
-  // );
-  // }, [setLocation])
 
   return (
-    <nav className="sticky w-full bg-white z-10 shadow-sm">
+    <nav className={`${fixed && "fixed"} w-full bg-white z-10 shadow-sm`}>
       <div className="py-4 border-b-[1px]">
         <WideSection>
           <div className="flex items-center justify-between gap-3 md:gap-0">
             <div className="flex-1" onClick={() => router.push("/")}>
               <Logo />
             </div>
-            <div className="flex-1 px-8">
-              <Search />
+            <div className="flex-grow lg:flex-1 md:px-8">
+              {search && <Search />}
             </div>
-            <div className="flex flex-1 justify-end">
+            <div className="flex flex-grow lg:flex-1 justify-end">
               <Menu currentUser={currentUser} />
             </div>
           </div>

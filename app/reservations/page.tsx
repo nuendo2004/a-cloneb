@@ -1,6 +1,7 @@
 import getCurrentUser from "../actions/getCurrentUser";
 import { getReservations } from "../actions/getReservations";
 import NotFound from "../components/NotFound";
+import Navbar from "../components/nav/Navbar";
 import ReservationPage from "./ReservationPage";
 
 const Reservation = async () => {
@@ -9,6 +10,7 @@ const Reservation = async () => {
   if (!curretUser) {
     return (
       <div>
+        <Navbar currentUser={curretUser} search={false} />
         <NotFound
           title="Page Not Found"
           subtitle="Please login to manege your reservation"
@@ -19,14 +21,20 @@ const Reservation = async () => {
   const reservations = await getReservations({ hostId: curretUser.id });
   if (reservations.length === 0)
     return (
-      <NotFound
-        title="Found 0 result"
-        subtitle="You don't have any reservation yet."
-      />
+      <>
+        <Navbar currentUser={curretUser} search={false} />
+        <NotFound
+          title="Found 0 result"
+          subtitle="You don't have any reservation yet."
+        />
+      </>
     );
 
   return (
-    <ReservationPage reservations={reservations} currentUser={curretUser} />
+    <>
+      <Navbar currentUser={curretUser} search={false} />
+      <ReservationPage reservations={reservations} currentUser={curretUser} />
+    </>
   );
 };
 

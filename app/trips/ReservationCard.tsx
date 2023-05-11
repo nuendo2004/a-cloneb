@@ -76,8 +76,8 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
           <div className={`relative border-b-2 flex items-center`}>
             <Heading
               title={title}
+              headerSize={minimum ? "text-xl" : "text-2xl"}
               subtitle={`House with ${roomCount} reserved`}
-              longText={true}
             />
           </div>
           <div className="flex">

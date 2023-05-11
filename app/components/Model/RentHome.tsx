@@ -35,8 +35,14 @@ const RentHome = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      category: "",
-      location: null,
+      category: "Trending",
+      location: [
+        {
+          address: "unknown",
+          location: { city: "unknown", state: "unknown", country: "unknown" },
+          latlng: [0, 0],
+        },
+      ],
       guestCount: 1,
       bathroomCount: 1,
       roomCount: 1,

@@ -9,13 +9,15 @@ interface PlacesProps {
   radius?: number; // redius is in meter
   latlng: number[];
   kind?: string;
+  className?: string;
 }
 
 const Places: React.FC<PlacesProps> = ({
-  listSize = 12,
+  listSize = 8,
   radius = 4000,
   latlng,
   kind = "interesting_places",
+  className,
 }) => {
   const [attractions, setAttractions] = useState([]);
   useEffect(() => {
@@ -49,7 +51,7 @@ const Places: React.FC<PlacesProps> = ({
   });
 
   return (
-    <div className="lg:max-w-[36%] mx-4">
+    <div className={`lg:max-w-[36%] mx-4 ${className}`}>
       <h2 className="mx-2 text-lg font-bold">Near by</h2>
       {mappedAttractions}
     </div>

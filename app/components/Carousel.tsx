@@ -5,8 +5,13 @@ import { TfiArrowCircleLeft } from "react-icons/tfi";
 interface CarouselProps extends PropsWithChildren {
   vertical?: boolean;
   increment?: number;
+  className?: string;
 }
-const Carousel: React.FC<CarouselProps> = ({ vertical, increment = 185 }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  className,
+  vertical,
+  increment = 185,
+}) => {
   const [currentPos, setCurrentPos] = useState(0);
   const [leftArrow, setLeftArrow] = useState(false);
   const [rightArrow, setRightArrow] = useState(true);
@@ -55,7 +60,7 @@ const Carousel: React.FC<CarouselProps> = ({ vertical, increment = 185 }) => {
   };
   return (
     <div
-      className={`md:px-16 xl:px-24 max-w-[2520px] flex ${
+      className={`${className} md:px-16 xl:px-24 max-w-[2520px] flex ${
         vertical ? "flex-column" : "flex-row"
       }
       items-center

@@ -5,7 +5,7 @@ interface HeadingProps {
   subtitle?: string;
   center?: boolean;
   className?: string;
-  longText?: boolean;
+  headerSize?: string;
 }
 
 const Heading: React.FC<HeadingProps> = ({
@@ -13,20 +13,14 @@ const Heading: React.FC<HeadingProps> = ({
   subtitle,
   center,
   className,
-  longText,
+  headerSize,
 }) => {
   return (
     <div className={`${center ? "text-center" : "text-start"} ${className}`}>
-      <div
-        className={`font-bold ${
-          longText ? "text-xl md:text-xl lg:text-3xl" : "text-2xl"
-        }`}
-      >
+      <div className={`font-bold ${headerSize ? headerSize : "text-2xl"}`}>
         {title}
       </div>
-      <div className={`font-light text-neu mt-2 ${longText && "my-0"}`}>
-        {subtitle}
-      </div>
+      <div className={`font-light text-neu mt-2`}>{subtitle}</div>
     </div>
   );
 };

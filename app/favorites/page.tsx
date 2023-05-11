@@ -3,6 +3,7 @@ import NotFound from "../components/NotFound";
 import getCurrentUser from "../actions/getCurrentUser";
 import getFoveriteListing from "../actions/getFovoriteListing";
 import Favorites from "./Favorites";
+import Navbar from "../components/nav/Navbar";
 
 const FavoritesPage = async () => {
   const listings = await getFoveriteListing();
@@ -16,7 +17,12 @@ const FavoritesPage = async () => {
       />
     );
   }
-  return <Favorites listings={listings} currentUser={currentUser} />;
+  return (
+    <>
+      <Navbar currentUser={currentUser} />
+      <Favorites listings={listings} currentUser={currentUser} />
+    </>
+  );
 };
 
 export default FavoritesPage;
