@@ -31,7 +31,13 @@ export default async function Home({ searchParams }: HomeProps) {
     />
   ));
 
-  if (listing.length === 0) return <NotFound showReset />;
+  if (listing.length === 0)
+    return (
+      <>
+        <Navbar currentUser={currentUser} />
+        <NotFound showReset />
+      </>
+    );
   return (
     <main className="relative">
       <Container>

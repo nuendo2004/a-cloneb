@@ -1,8 +1,6 @@
 import WideSection from "@/app/components/WideSection";
 import { SafeListing, SafeUser } from "../../types";
 import Heading from "@/app/components/Heading";
-import Button from "@/app/components/Button";
-import useRentHome from "@/app/hooks/useRentHome";
 import ListingCard from "@/app/components/listing/ListingCard";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { getListingByHost } from "@/app/actions/getListingByHost";
