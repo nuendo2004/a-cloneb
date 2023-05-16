@@ -1,4 +1,5 @@
-A CloneB is an Airbnb clone utilized newest technology such as Next.js and Typescript
+A CloneB is an Airbnb clone utilized newest technology such as Next.js, Typescript
+Database layer is built on Mongodb host on Atlas, accessed using Prisma.
 
 Live site (https://a-cloneb-git-main-nuendo2004.vercel.app/)
 
